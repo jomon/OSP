@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+
+    <title>Spring Framework Guru</title>
+
+    <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+    
+</head>
+<body>
+<!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+
+<div class="container">
+    <h2>Device Details</h2>
+     <div class="panel-footer">
+			 <div class="row">
+				<div class="col-sm-10 col-sm-offset-0">
+				  <button onClick="config()" id="button" value="config"  class="btn btn-primary">Apply</button>&nbsp;
+				  <t> Settings will be applied to all devices that fall under this profile.</t>
+				</div>
+			 </div>
+		  </div><!-- panel-footer -->
+        <br />
+        <!-- Nav tabs -->
+		<ul class="nav nav-tabs">
+          <li class="active"><a href="#"  th:href="@{/configuration/new}" data-toggle="tab"><strong>Basic Settings</strong></a></li>
+          <li><a href="#" th:href="@{/wifi}" data-toggle="tab"><strong>WiFi Settings</strong></a></li>
+           <li><a href="#" data-toggle="tab"><strong>Disable Applications</strong></a></li>
+          <!--<li><a href="#browser" data-toggle="tab"><strong>Browser</strong></a></li>-->
+         <li><a href="#" data-toggle="tab"><strong>KIOSK</strong></a></li>
+         <li><a href="#" data-toggle="tab"><strong>Applications</strong></a></li>
+          <li><a href="#" data-toggle="tab"><strong>Manage Device</strong></a></li>
+         <!--  <li><a href="#video" data-toggle="tab"><strong>Video Looper</strong></a></li> -->
+          <li><a href="#" data-toggle="tab"><strong>Advanced</strong></a></li>
+        </ul>
+    <div>
+     <br />
+        <form class="form-horizontal" th:object="${wifi}" th:action="@{/wifi}" method="post">
+            <input type="hidden" th:field="*{id}"/>
+             <div class="form-group">
+              <label class="col-sm-3 control-label">AP SETTINGS</label>
+              <div class="col-sm-5">
+                  <label class="col-sm-2 control-label">SSID:</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" th:field="*{profileName}"/>
+                </div>
+               </div>
+               <button onclick="addwifi()" id="button" value="add" type="button" class="btn btn-primary">ADD</button>
+            </div>
+ 
+        </form>
+    </div>
+</div>
+
+</body>
+
+<script>
+function addwifipackage( ssid,identity,wifipassword,eap,phase2,status )
+{
+ "use strict";
+
+    jQuery('#table3').dataTable();
+
+var profile = $("#profile1").val();
+//var packagename = $("#packagename").val();
+
+     console.log(status);
+//console.log(dataString);
+// AJAX Code To Submit Form.
+$.ajax({
+type: "POST",
+url: "/addwifi",
+data: dataString,
+cache: false,
+success: function(response){
+// Create table content from server data
+           // var table = $.makeTable($.parseJSON(content));
+            // Append table data to table element in index.html
+            //$(table).appendTo("#TableContent");
+           // console.log(content);      // Dump all data of the Object in the console
+ var trHTML = '';
+ var counter = 0;
+
+
+}
+
+
+});
+//Ajax
+
+}
+
+function updatewifitable(profile )
+{
+ "use strict";
+
+    jQuery('#table3').dataTable();
+
+//var profile = $("#profile1").val();
+
+
+var dataString = 'profile='+ profile;
+//console.log("profile");
+//console.log(profile);
+
+// AJAX Code To Submit Form.
+$.ajax({
+type: "POST",
+url: "wifi.php",
+data: dataString,
+datatype:'json',
+cache: false,
+success: function(response){
+// Create table content from server data
+           // var table = $.makeTable($.parseJSON(content));
+            // Append table data to table element in index.html
+            //$(table).appendTo("#TableContent");
+           // console.log(content);      // Dump all data of the Object in the console
+ var trHTML = '';
+ var counter = 0;
+
+ var usrname ='';
+ var t = $('#table3').DataTable();
+	t.clear();
+	t.draw();
+  var profile = $("#profile1").val();
+
+        $.each(JSON.parse(response), function (i, item) {
+            counter ++;
+            t.row.add( [
+            item.ssid,
+            item.identity,
+            item.eap,
+            item.authetication
+      ] ).draw( false );
+
+
+        });
+}
+
+
+});
+//Ajax
+
+
+
+
+}
+
+// Delete a record
+function tablewifioperation(){
+
+//$('#table1').on( 'click', 'img.icon-delete', function () {
+  //  table
+    //    .row( $(this).parents('tr') )
+      //  .remove()
+        //.draw();
+//} );
+if ( confirm( "Are you sure you want to delete WIFI settings?" ) ) {
+ $('#table3').on( 'click', 'a.editor_remove', function (e) {
+       e.preventDefault();
+
+// jQuery('#table1').dataTable();
+
+var table = $('#table3').DataTable();
+
+ var data = table.row( $(this).parents('tr')).data();
+
+ //console.log( data[0]);
+
+
+ addwifipackage(data[0],data[1],0,data[2],data[3],0);
+ //console.log(data[0]);
+ //console.log(data[1]);
+ //console.log(data[2]);
+ //console.log(data[3]);
+ //updatetable();
+//table
+  //      .row( $(this).parents('tr') )
+    //    .remove()
+      //  .draw();
+ var profile = $("#profile1").val();
+ updatewifitable(profile);
+ });
+ }
+ }
+
+function addwifi(){
+
+	//console.log("button clicked");
+	var ssid = $("#ssid").val();
+	var identity = $("#identity").val();
+	var wifipassword = $("#wifipassword").val();
+	var eap = $("#eap").val();
+	var phase2 = $("#phase2").val();
+	if(ssid!="")
+	{
+	addwifipackage(ssid,identity,wifipassword,eap,phase2,1);
+	var profile = $("#profile1").val();
+	updatewifitable(profile);
+	document.getElementById("ssid").value = "";
+	document.getElementById("identity").value = "";
+	document.getElementById("eap").value = "Open";
+	document.getElementById("phase2").value = "NONE";
+	document.getElementById("wifipassword").value = "";
+	}
+return;
+
+}
+</script>
+</html>

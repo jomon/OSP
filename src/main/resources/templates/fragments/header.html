@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.4/css/bootstrap.min.css"
+          th:href="@{/webjars/bootstrap/3.3.4/css/bootstrap.min.css}"
+          rel="stylesheet" media="screen"/>
+
+    <script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"
+            th:src="@{/webjars/jquery/2.1.4/jquery.min.js}"></script>
+
+    <link href="../../static/css/guru.css"
+          th:href="@{css/guru.css}" rel="stylesheet" media="screen"/>
+</head>
+<body>
+ <div th:fragment="header">
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+<div class="leftpanel">  
+    <div class="logopanel">
+        <h1><span>[</span> OSP <span>]</span></h1>
+    </div><!-- logopanel -->     
+    <div class="leftpanelinner">    
+        <!-- This is only visible to small devices -->
+        <div class="visible-xs hidden-sm hidden-md hidden-lg">   
+            <div class="media userlogged">
+                <img alt="" src="/images/loggeduser.png" class="media-object"/>
+                <div class="media-body">
+                    <h4></h4>
+                    <span>"</span>
+                </div>
+            </div>
+          
+            <h5 class="sidebartitle actitle">Account</h5>
+            <ul class="nav nav-pills nav-stacked nav-bracket mb30">
+              <li><a href="dashboard.html"><i class="fa fa-user"></i> <span>Profile</span></a></li>
+              <li><a href="dashboard.html"><i class="fa fa-cog"></i> <span>Account Settings</span></a></li>
+              <li><a href="dashboard.html"><i class="fa fa-question-circle"></i> <span>Help</span></a></li>
+              <li><a href="https://www.ospforbusiness.com/signout.html"><i class="fa fa-sign-out"></i> <span>Sign Out</span></a></li>
+            </ul>
+        </div>
+      
+      <h5 class="sidebartitle">Navigationssssss</h5>
+      <ul class="nav nav-pills nav-stacked nav-bracket">
+        <li class="active"><a href="#" th:href="@{/ }"><i class="fa fa-home"></i> <span>Dashboard</span></a></li>
+        <li  ><a href="#" th:href="@{/configurations}"><i class="fa fa-edit"></i> <span>Configuration</span></a></li>
+        <li ><a href="#" th:href="@{/apps}"><i class="fa fa-android"></i> <span>Applications</span></a></li>
+        <li ><a href="#" th:href="@{/devices}"><i class="fa fa-tablet"></i> <span>Devices</span></a></li>
+        <li ><a href="#" th:href="@{/}"><i class="fa  fa-users"></i> <span>Registration</span></a></li>
+        <li  ><a href="#" th:href="@{/licenses}"><i class="fa   fa-key"></i> <span>License</span></a></li>
+        <li><a href="#" th:href="@{/}"><i class="fa fa-list-alt"></i> <span>Report</span></a></li>
+      </ul> 
+    </div><!-- leftpanelinner -->
+  </div><!-- leftpanel -->
+</div>
+</div>
+</nav>
+</div>
+</body>
+</html>
