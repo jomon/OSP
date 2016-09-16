@@ -16,13 +16,13 @@ private WifiRepository wifiRepository;
 	@Override
 	public Wifi getWifiById(Integer Id) {
 		// TODO Auto-generated method stub
-		return null;
+		return wifiRepository.findOne(Id);
 	}
 
 	@Override
 	public Wifi savewifi(Wifi wifi) {
 		// TODO Auto-generated method stub
-		return null;
+		return wifiRepository.save(wifi);
 	}
 	
 }
