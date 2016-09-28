@@ -49,5 +49,11 @@ public class ConfigurationController {
         model.addAttribute("configuration", configurationService.getConfigurationById(id));
         return "configurationform";
     }
+    
+    @RequestMapping(value = "/disableapps", method = RequestMethod.GET)
+    public String disableslist(Model model){
+     
+        return "disabledappform";
+    }
 
 }

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+
+    <title>Spring Framework Guru</title>
+
+    <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+    
+</head>
+<body>
+<!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+
+<div class="container">
+    <h2>Configurations</h2>
+     <div class="panel-footer">
+			 <div class="row">
+				<div class="col-sm-10 col-sm-offset-0">
+				  <button onClick="config()" id="button" value="config"  class="btn btn-primary">Apply</button>&nbsp;
+				  <t> Settings will be applied to all devices that fall under this profile.</t>
+				</div>
+			 </div>
+		  </div><!-- panel-footer -->
+        <br />
+        <!-- Nav tabs -->
+		<ul class="nav nav-tabs">
+          <li ><a href="#"  th:href="@{/configuration/new}" data-toggle="tab"><strong>Basic Settings</strong></a></li>
+          <li><a href="#" th:href="@{/wifi/new}" data-toggle="tab"><strong>WiFi Settings</strong></a></li>
+           <li><a href="#" th:href="@{/disableapps}" data-toggle="tab"><strong>Disable Applications</strong></a></li>
+          <!--<li><a href="#browser" th:href="@{/kiosk/new}" data-toggle="tab"><strong>Browser</strong></a></li>-->
+         <li class="active"><a href="#"  th:href="@{/kiosk/new}" data-toggle="tab"><strong>KIOSK</strong></a></li>
+         <li><a href="#" data-toggle="tab"><strong>Applications</strong></a></li>
+          <li><a href="#" data-toggle="tab"><strong>Manage Device</strong></a></li>
+         <!--  <li><a href="#video" data-toggle="tab"><strong>Video Looper</strong></a></li> -->
+          <li><a href="#" data-toggle="tab"><strong>Advanced</strong></a></li>
+        </ul>
+    <div>
+     <br />
+        <form class="form-horizontal" th:object="${kiosk}" th:action="@{/kiosk}" method="post">
+            <input type="hidden" th:field="*{id}"/>
+            <div class="form-group">
+            <label class="col-sm-2 control-label">KIOSK DETAILS</label>
+            </div>
+             <div class="form-group">
+                 <div class="col-sm-8">
+                  <label class="col-sm-2 control-label">KIOSK TYPE:</label>
+                <div class="col-sm-10">
+                    <select id="eapList" name="eapListId" th:field="*{kioskType}" >
+                    	<option th:each="option : ${kiosklist}" th:value="${option.id}" 
+                        th:text="${option.name}" >Options</option>
+           			 </select>
+                </div>
+               </div>
+         </div>
+              <div class="form-group">
+                <div class="col-sm-8">
+                  <label class="col-sm-2 control-label">KIOSK PASSWORD:</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" th:field="*{password}"/>
+                </div>
+               </div>
+               </div>
+             <div class="form-group">
+                 <div class="col-sm-8">
+                  <label class="col-sm-2 control-label">SINGLE APP KIOSK:</label>
+                  <label id="help1"><font color="orange"> <i>NOTE: Please disable STATUS BAR, BACK KEY, RECENTS KEY </i></font></label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" placeholder="ENTER a package name ( com.microsoft.word )"/>
+                </div>
+               </div>
+               <button  type="submit" class="btn btn-primary">ADD</button>
+            </div>
+            <div class="form-group">
+                 <div class="col-sm-8">
+                  <label class="col-sm-2 control-label">BROWSER KIOSK:</label>
+                  <label id="help2"><font color="orange"><i>NOTE: Please disable STATUS BAR, HOME KEY, BACK KEY, RECENTS KEY</i></font></label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control"  placeholder="ENTER an URL starting with HTTP or HTTPS ( http://www.bbc.co.uk )"/>
+                </div>
+               </div>
+               <button  type="submit" class="btn btn-primary">ADD</button>
+            </div>
+            <div class="form-group">
+                 <div class="col-sm-8">
+                  <label class="col-sm-2 control-label">DASHBOARD KIOSK:</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" placeholder="com.microsoft.word OR http://www.bbc.com"/>
+                </div>
+               </div>
+               <button  type="submit" class="btn btn-primary">ADD</button>
+            </div>
+  		 <div class="form-group">
+                 <div class="col-sm-8">
+                  <label class="col-sm-2 control-label">BROWSER:</label>
+                <div class="col-sm-10">
+                    <select id="eapList" name="eapListId" th:field="*{browser}" >
+                    	<option th:each="option : ${browserlist}" th:value="${option.id}" 
+                        th:text="${option.name}" >Options</option>
+           			 </select>
+                </div>
+               </div>
+         </div>
+
+        </form>
+    </div>
+        <div th:if="${not #lists.isEmpty(kiosks)}">
+        <h2>KIOSK LIST</h2>
+        <table class="table table-striped">
+            <tr>
+                <th>Id</th>
+                <th>Browser</th>
+                <th>View</th>
+                <th>Edit</th>
+            </tr>
+            <tr th:each="wifi : ${kiosks}">
+                <td th:text="${wifi.id}"><a href="/wifi/${wifi.id}">Id</a></td>
+                <td th:text="${wifi.browser}">Browser</td>
+                <td><a th:href="${ '/kiosk/' + wifi.id}">View</a></td>
+                <td><a th:href="${'/kiosk/edit/' + wifi.id}">Edit</a></td>
+            </tr>
+        </table>
+
+    </div>
+</div>
+
+</body>
+
+</html>
