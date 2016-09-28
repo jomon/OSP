@@ -11,11 +11,11 @@
 <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
 
 <div class="container">
-    <h2>Device Details</h2>
+    <h2>Configurations</h2>
      <div class="panel-footer">
 			 <div class="row">
 				<div class="col-sm-10 col-sm-offset-0">
-				  <button onClick="config()" id="button" value="config"  class="btn btn-primary">Apply</button>&nbsp;
+				  <button onClick="clicksubmit()" id="button" value="config"  class="btn btn-primary">Apply</button>&nbsp;
 				  <t> Settings will be applied to all devices that fall under this profile.</t>
 				</div>
 			 </div>
@@ -24,10 +24,10 @@
         <!-- Nav tabs -->
 		<ul class="nav nav-tabs">
           <li class="active"><a href="#" data-toggle="tab"><strong>Basic Settings</strong></a></li>
-          <li><a href="#" th:href="@{/wifi}" data-toggle="tab"><strong>WiFi Settings</strong></a></li>
-           <li><a href="#" data-toggle="tab"><strong>Disable Applications</strong></a></li>
+          <li><a href="#" th:href="@{/wifi/new}" data-toggle="tab"><strong>WiFi Settings</strong></a></li>
+           <li><a href="#" th:href="@{/disableapps}" data-toggle="tab"><strong>Disable Applications</strong></a></li>
           <!--<li><a href="#browser" data-toggle="tab"><strong>Browser</strong></a></li>-->
-         <li><a href="#" data-toggle="tab"><strong>KIOSK</strong></a></li>
+         <li><a href="#" th:href="@{/kiosk/new}" data-toggle="tab"><strong>KIOSK</strong></a></li>
          <li><a href="#" data-toggle="tab"><strong>Applications</strong></a></li>
           <li><a href="#" data-toggle="tab"><strong>Manage Device</strong></a></li>
          <!--  <li><a href="#video" data-toggle="tab"><strong>Video Looper</strong></a></li> -->
@@ -109,11 +109,16 @@
               		<input type="checkbox" th:field="*{gps}" />
         </div>
             <div class="row">
-                <button type="submit" class="btn btn-default">Submit</button>
+                <button type="submit" id="sub" class="btn btn-default">Submit</button>
             </div>
         </form>
     </div>
 </div>
 
 </body>
+<script type="text/javascript">
+function clicksubmit() {
+    document.getElementById("sub").click();
+}
+</script>
 </html>

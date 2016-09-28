@@ -11,7 +11,7 @@
 <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
 
 <div class="container">
-    <h2>Device Details</h2>
+    <h2>Configurations</h2>
      <div class="panel-footer">
 			 <div class="row">
 				<div class="col-sm-10 col-sm-offset-0">
@@ -23,11 +23,11 @@
         <br />
         <!-- Nav tabs -->
 		<ul class="nav nav-tabs">
-          <li class="active"><a href="#"  th:href="@{/configuration/new}" data-toggle="tab"><strong>Basic Settings</strong></a></li>
-          <li><a href="#" th:href="@{/wifi}" data-toggle="tab"><strong>WiFi Settings</strong></a></li>
-           <li><a href="#" data-toggle="tab"><strong>Disable Applications</strong></a></li>
-          <!--<li><a href="#browser" data-toggle="tab"><strong>Browser</strong></a></li>-->
-         <li><a href="#" data-toggle="tab"><strong>KIOSK</strong></a></li>
+          <li ><a href="#"  th:href="@{/configuration/new}" data-toggle="tab"><strong>Basic Settings</strong></a></li>
+          <li class="active"><a href="#" th:href="@{/wifi/new}" data-toggle="tab"><strong>WiFi Settings</strong></a></li>
+           <li><a href="#" th:href="@{/disableapps}" data-toggle="tab"><strong>Disable Applications</strong></a></li>
+          <!--<li><a href="#browser" th:href="@{/kiosk/new}" data-toggle="tab"><strong>Browser</strong></a></li>-->
+         <li><a href="#"  th:href="@{/kiosk/new}" data-toggle="tab"><strong>KIOSK</strong></a></li>
          <li><a href="#" data-toggle="tab"><strong>Applications</strong></a></li>
           <li><a href="#" data-toggle="tab"><strong>Manage Device</strong></a></li>
          <!--  <li><a href="#video" data-toggle="tab"><strong>Video Looper</strong></a></li> -->
@@ -37,24 +37,103 @@
      <br />
         <form class="form-horizontal" th:object="${wifi}" th:action="@{/wifi}" method="post">
             <input type="hidden" th:field="*{id}"/>
+            <div class="form-group">
+            <label class="col-sm-2 control-label">AP SETTINGS</label>
+            </div>
              <div class="form-group">
-              <label class="col-sm-3 control-label">AP SETTINGS</label>
-              <div class="col-sm-5">
+              <div class="col-sm-8">
                   <label class="col-sm-2 control-label">SSID:</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" th:field="*{profileName}"/>
+                    <input type="text" class="form-control" th:field="*{ssid}"/>
                 </div>
                </div>
-               <button onclick="addwifi()" id="button" value="add" type="button" class="btn btn-primary">ADD</button>
+              </div>
+              <div class="form-group">
+                <div class="col-sm-8">
+                  <label class="col-sm-2 control-label">IDENTITY:</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" th:field="*{identity}"/>
+                </div>
+               </div>
+               </div>
+             <div class="form-group">
+                 <div class="col-sm-8">
+                  <label class="col-sm-2 control-label">PASSWORD:</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" th:field="*{password}"/>
+                </div>
+               </div>
+               <button  type="submit" class="btn btn-primary">ADD</button>
             </div>
- 
+  		 <div class="form-group">
+                 <div class="col-sm-8">
+                  <label class="col-sm-2 control-label">EAP METHOD:</label>
+                <div class="col-sm-10">
+                    <select id="eapList" name="eapListId" th:field="*{eapMethod}" >
+                    	<option th:each="option : ${eaplist}" th:value="${option.id}" 
+                        th:text="${option.name}" >Options</option>
+           			 </select>
+                </div>
+               </div>
+         </div>
+         <div class="form-group">
+                 <div class="col-sm-8">
+                  <label class="col-sm-2 control-label">PHASE 2 AUTHENTICATION:</label>
+                <div class="col-sm-10">
+                    <select id="authlist" name="authListId" th:field="*{phaseAuth}" >
+                    	<option th:each="option : ${authenticationlist}" th:value="${option.id}" 
+                        th:text="${option.name}" >Options</option>
+           			 </select>
+                </div>
+               </div>
+         </div>   
+           <div class="form-group">
+                <div class="col-sm-8">
+                  <label class="col-sm-2 control-label">GLOBAL PROXY:</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" th:field="*{globalProxy}"/>
+                </div>
+               </div>
+           </div>
+           <div class="form-group">
+                <div class="col-sm-8">
+                  <label class="col-sm-2 control-label">GLOBAL PORT:</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" th:field="*{globalPort}"/>
+                </div>
+               </div>
+           </div>
         </form>
+    </div>
+        <div th:if="${not #lists.isEmpty(wifies)}">
+        <h2>Wifi List</h2>
+        <table class="table table-striped">
+            <tr>
+                <th>Id</th>
+                <th>SSID</th>
+                <th>Identity</th>
+                <th>Proxy</th>
+                <th>Port</th>
+                <th>View</th>
+                <th>Edit</th>
+            </tr>
+            <tr th:each="wifi : ${wifies}">
+                <td th:text="${wifi.id}"><a href="/wifi/${wifi.id}">Id</a></td>
+                <td th:text="${wifi.ssid}">SSID</td>
+                <td th:text="${wifi.identity}">Identity</td>
+                <td th:text="${wifi.globalProxy}">Proxy</td>
+                <td th:text="${wifi.globalPort}">Port</td>
+                <td><a th:href="${ '/wifi/' + wifi.id}">View</a></td>
+                <td><a th:href="${'/wifi/edit/' + wifi.id}">Edit</a></td>
+            </tr>
+        </table>
+
     </div>
 </div>
 
 </body>
 
-<script>
+<!-- <script>
 function addwifipackage( ssid,identity,wifipassword,eap,phase2,status )
 {
  "use strict";
@@ -207,5 +286,5 @@ function addwifi(){
 return;
 
 }
-</script>
+</script> -->
 </html>

@@ -21,13 +21,14 @@ public class AppController {
     @RequestMapping(value = "/apps", method = RequestMethod.GET)
     public String list(Model model){
     	model.addAttribute("app", new App());
-        model.addAttribute("app",appService.listAllApps() );
+        model.addAttribute("apps",appService.listAllApps() );
         return "apps";
     }
     
     @RequestMapping("app/new")
     public String newApp(Model model){
         model.addAttribute("app", new App());
+        model.addAttribute("apps",appService.listAllApps() );
         return "appform";
     }
 
@@ -36,7 +37,7 @@ public class AppController {
 
         appService.saveApp(app);
 
-        return "redirect:/apps";
+        return "redirect:/app/new";
     }
     
     @RequestMapping("app/{id}")

@@ -41,13 +41,15 @@ public class LicenseController {
     @RequestMapping("license/new")
     public String newLicense(Model model){
         model.addAttribute("license", new License());
+        model.addAttribute("licenses", licenseService.listAllLicenses());
+
         return "licenseform";
     }
 
     @RequestMapping(value = "license", method = RequestMethod.POST)
     public String saveLicense(License license){
         licenseService.saveLicense(license);
-        return "redirect:/licenses";
+        return "redirect:/license/new";
     }
 
 }
