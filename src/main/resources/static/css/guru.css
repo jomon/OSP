@@ -4686,7 +4686,7 @@ h4, .h4 {
 }
 
 .form-group .control-label {
-   margin-top: 3px;
+   margin-top: -7px;
 }
 
 .form-bordered .form-group {

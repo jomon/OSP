@@ -55,5 +55,15 @@ public class ConfigurationController {
      
         return "disabledappform";
     }
+    @RequestMapping(value = "/registrations", method = RequestMethod.GET)
+    public String registrationsearch(Model model){
+    	model.addAttribute("configurations",configurationService.listAllConfigurations() );
+        return "registrationform";
+    }
+    
+    @RequestMapping(value = "/advanced", method = RequestMethod.GET)
+    public String advanceoption(Model model){
+    	        return "advanceoptionform";
+    }
 
 }

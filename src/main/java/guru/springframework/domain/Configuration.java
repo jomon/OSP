@@ -27,7 +27,7 @@ public class Configuration {
 	private Boolean lockScreen;
 	private Boolean bluetooth;
 	private Boolean gps;
-	
+
 	public Boolean getMdmClientDisplay() {
 		return mdmClientDisplay;
 	}
@@ -136,4 +136,5 @@ public class Configuration {
 	public void setProfileName(String profileName) {
 		this.profileName = profileName;
 	}
+
 }

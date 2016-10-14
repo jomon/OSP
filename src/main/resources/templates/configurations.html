@@ -9,8 +9,20 @@
 <body>
 <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
 <div class="container">
-  <button onclick="location.href='/configuration/new';" id="button" value="add" type="button" class="btn btn-primary">Create Profile</button>
-      <h2>Configuration List</h2>
+<div class="panel panel-default">
+	 <div class="panel-heading">
+	          <div class="panel-btns">
+	            <a href="configuration.html" class="panel-close">&times;</a>
+	            <a href="configuration.html" class="minimize">&minus;</a>
+	          </div>
+	          <h4 class="panel-title">NEW PROFILE</h4>
+	
+	 </div>
+	        <div class="panel-body">
+	  			<button onclick="location.href='/configuration/new';" id="button" value="add" type="button" class="btn btn-primary">Create Profile</button>
+	  		</div>
+  </div>
+      <h2>Profiles</h2>
         <table class="table table-striped">
             <tr>
                 <th>Id</th>

@@ -7,46 +7,11 @@
     <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
 </head>
 <body>
+<!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
 
 <div class="container">
-  <div class="leftpanel">  
-    <div class="logopanel">
-        <h1><span>[</span> OSP <span>]</span></h1>
-    </div><!-- logopanel -->     
-    <div class="leftpanelinner">    
-        <!-- This is only visible to small devices -->
-        <div class="visible-xs hidden-sm hidden-md hidden-lg">   
-            <div class="media userlogged">
-                <img alt="" src="/images/loggeduser.png" class="media-object"/>
-                <div class="media-body">
-                    <h4></h4>
-                    <span>"</span>
-                </div>
-            </div>
-          
-            <h5 class="sidebartitle actitle">Account</h5>
-            <ul class="nav nav-pills nav-stacked nav-bracket mb30">
-              <li><a href="dashboard.html"><i class="fa fa-user"></i> <span>Profile</span></a></li>
-              <li><a href="dashboard.html"><i class="fa fa-cog"></i> <span>Account Settings</span></a></li>
-              <li><a href="dashboard.html"><i class="fa fa-question-circle"></i> <span>Help</span></a></li>
-              <li><a href="https://www.ospforbusiness.com/signout.html"><i class="fa fa-sign-out"></i> <span>Sign Out</span></a></li>
-            </ul>
-        </div>
-      
-      <h5 class="sidebartitle">Navigation</h5>
-      <ul class="nav nav-pills nav-stacked nav-bracket">
-        <li class="active"><a href="#" th:href="@{/ }"><i class="fa fa-home"></i> <span>Dashboard</span></a></li>
-        <li  ><a href="#" th:href="@{/configurations}"><i class="fa fa-edit"></i> <span>Configuration</span></a></li>
-        <li ><a href="#" th:href="@{/apps}"><i class="fa fa-android"></i> <span>Applications</span></a></li>
-        <li ><a href="#" th:href="@{/devices}"><i class="fa fa-tablet"></i> <span>Devices</span></a></li>
-        <li ><a href="#" th:href="@{/}"><i class="fa  fa-users"></i> <span>Registration</span></a></li>
-        <li  ><a href="#" th:href="@{/licenses}"><i class="fa   fa-key"></i> <span>License</span></a></li>
-        <li><a href="#" th:href="@{/}"><i class="fa fa-list-alt"></i> <span>Report</span></a></li>
-      </ul> 
-    </div><!-- leftpanelinner -->
-  </div><!-- leftpanel -->
-    <h2>Device Details</h2>
-        <div>
+      <h2>Device Details</h2>
+<!--         <div>
             <form class="form-horizontal">
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Device Id:</label>
@@ -72,7 +37,104 @@
                     </div>
                 </div>
             </form>
-    </div>
+    </div> -->
+    <div class="contentpanel">
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h5 class="bug-key-title"></h5>
+                            <div class="panel-title" id="serialnumber" th:text="${device.deviceId}" >xzcxzcz</div>
+                        </div><!-- panel-heading-->
+                        <div class="panel-body">
+                            <div class="btn-group mr10">
+                                <button class="btn btn-success" onclick="restartclicked()" type="button" value="1" id="restart"><i class="fa fa-retweet mr5"></i> Restart</button>
+                                <button class="btn btn-primary" onclick="wipeclicked()" type="button" value="2" id="wipe"><i class="fa  fa-eraser"></i> Wipe</button>
+                                <button class="btn btn-warning" data-toggle="modal" data-target="#myModal" type="button" id="reset"><i class="fa fa-magic mr5"></i> Factory Reset</button>
+                                <button class="btn btn-danger" onclick="deleteclicked()" type="button" id="del"><i class="glyphicon glyphicon-lock"></i> Disable KIOSK</button>
+                            </div>
+
+                            <div class="btn-group mr10">
+                                <button class="btn btn-primary" onclick="refreshclicked()" type="button" id="refresh"><i class="fa fa-spinner mr5"></i>Refresh</button>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <h5 class="subtitle subtitle-lined">Details</h5>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="row">
+                                                <div class="col-xs-6">Device Identifier</div>
+                                                <div class="col-xs-6" id="devicename" th:text="${device.id}" >cxzcxzc</div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-xs-6">Profile</div>
+                                                <div class="col-xs-6" id="groupname">my profile</div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-xs-6">Status</div>
+                                                <div class="col-xs-6" id="devicestatus">unprovisioned</div>
+                                            </div>
+                                             <div class="row">
+                                                <div class="col-xs-6">Battery Level</div>
+                                                <div class="col-xs-6" id="battery" th:text="${device.battery}">20%</div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-xs-6">Activation Date</div>
+                                                <div class="col-xs-6" id="activationdate" th:text="${device.activationDate}"
+                                                >0000-00-00 00:00:00</div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-xs-6">Last Seen On</div>
+                                                <div class="col-xs-6" id="lastseen" th:text="${device.lastSeenOn}"
+                                                ></div>
+                                            </div>
+                                             <div class="row">
+                                                <div class="col-xs-6">OSP Client Version</div>
+                                                <div class="col-xs-6" id="mdmversion" th:text="${device.ospClientVersion}"></div>
+                                            </div>
+
+                                        </div><!-- col-sm-6 -->
+                                        <div class="col-sm-6">
+                                        	  <div class="row">
+                                                <div class="col-xs-6">Model Number</div>
+                                                <div class="col-xs-6" id="modelnumber" th:text="${device.modelNumber}"></div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-xs-6">MAC Address</div>
+                                                <div class="col-xs-6" id="macaddress" th:text="${device.macAddress}"
+                                                ></div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-xs-6">IP Address</div>
+                                                <div class="col-xs-6" id="ipaddress" th:text="${device.ipAddress}"
+                                                >0</div>
+                                            </div>
+                                             <div class="row">
+                                                <div class="col-xs-6">Location</div>
+                                                <div class="col-xs-6" id="location" th:text="${device.location}"
+                                                ></div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-xs-6">Operating System</div>
+                                                <div class="col-xs-6" id="os" th:text="${device.operatingSystem}"
+                                                ></div>
+                                            </div>
+                                             <div class="row">
+                                                <div class="col-xs-6">Gateway IP Address</div>
+                                                <div class="col-xs-6" id="gateway" th:text="${device.gatewayIPAddress}"
+                                                ></div>
+                                            </div>
+                                             <div class="row">
+                                                <div class="col-xs-6">Profile Counter</div>
+                                                <div class="col-xs-6" id="profilecounter">1</div>
+                                            </div>
+                                    </div>
+                                    </div>
+                                    </div><!-- row -->
+                                    </div>
+    </div><!-- panel-body -->
+  </div><!-- panel -->
+</div><!-- contentpanel -->
 </div>
 
 </body>

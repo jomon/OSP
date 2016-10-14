@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+
+    <title>Spring Framework Guru</title>
+
+    <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+</head>
+<body>
+<!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+
+<div class="container">
+<h2>Configurations</h2>
+    	 <div class="panel-footer">
+			 <div class="row">
+				<div class="col-sm-10 col-sm-offset-0">
+				  <button onClick="config()" id="button" value="config"  class="btn btn-primary">Apply</button>&nbsp;
+				  <t> Settings will be applied to all devices that fall under this profile.</t>
+				</div>
+			 </div>
+		  </div><!-- panel-footer -->
+        <br/>
+        <!-- Nav tabs -->
+		<ul class="nav nav-tabs">
+          <li ><a href="#"  th:href="@{/configuration/new}" data-toggle="tab"><strong>Basic Settings</strong></a></li>
+          <li><a href="#" th:href="@{/wifi/new}" data-toggle="tab"><strong>WiFi Settings</strong></a></li>
+           <li><a href="#" th:href="@{/disableapps}" data-toggle="tab"><strong>Disable Applications</strong></a></li>
+          <!--<li><a href="#browser" th:href="@{/kiosk/new}" data-toggle="tab"><strong>Browser</strong></a></li>-->
+         <li><a href="#"  th:href="@{/kiosk/new}" data-toggle="tab"><strong>KIOSK</strong></a></li>
+		 <li><a href="#" th:href="@{/profileapp}" data-toggle="tab"><strong>Applications</strong></a></li>
+          <li class="active"><a href="#" th:href="@{/managedevice}" data-toggle="tab"><strong>Manage Device</strong></a></li>
+         <!--  <li><a href="#video" data-toggle="tab"><strong>Video Looper</strong></a></li> -->
+          <li><a href="#" th:href="@{/advanced}" data-toggle="tab"><strong>Advanced</strong></a></li>
+        </ul>
+     <br />
+  <h2>Device Details</h2>
+    <div>
+        <form class="form-horizontal" th:object="${device}" th:action="@{/device}" method="post">
+           <input type="hidden" th:field="*{id}"/>
+            <input type="hidden" th:field="*{version}"/>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Device Id:</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" th:field="*{deviceId}"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Serial Number:</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" th:field="*{mdm}"/>
+                </div>
+            </div>
+            
+            <div class="row">
+                <button type="submit" class="btn btn-default">Submit</button>
+            </div>
+        </form>
+    </div>
+        <h2>Device List</h2>
+        <table class="table table-striped">
+            <tr>
+                <th>Id</th>
+                <th>Product Id</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>View</th>
+                <th>Edit</th>
+            </tr>
+            <tr th:each="device : ${devices}">
+                <td th:text="${device.id}"><a href="/device/${device.id}">Id</a></td>
+                <td th:text="${device.deviceId}">device Id</td>
+                <td th:text="${device.mdm}">MDM</td>
+                <td th:text="${device.battery}">Battery</td>
+                <td><a th:href="${ '/device/' + device.id}">View</a></td>
+                <td><a th:href="${'/device/edit/' + device.id}">Edit</a></td>
+            </tr>
+        </table>
+
+    </div>
+</body>
+</html>

@@ -9,9 +9,9 @@ import javax.persistence.metamodel.StaticMetamodel;
 @StaticMetamodel(App.class)
 public abstract class App_ {
 
-	public static volatile SingularAttribute<App, String> appName;
-	public static volatile SingularAttribute<App, File> packagefile;
+	public static volatile SingularAttribute<App, File> appfile;
 	public static volatile SingularAttribute<App, Integer> id;
+	public static volatile SingularAttribute<App, String> packageName;
 	public static volatile SingularAttribute<App, String> versionCode;
 
 }

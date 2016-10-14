@@ -51,5 +51,10 @@ public class DeviceController {
         model.addAttribute("device", deviceService.getDeviceById(id));
         return "deviceform";
     }
+    @RequestMapping(value = "/managedevice", method = RequestMethod.GET)
+    public String managedevice(Model model){
+        model.addAttribute("device", new Device());
+    	        return "managedeviceform";
+    }
 
 }

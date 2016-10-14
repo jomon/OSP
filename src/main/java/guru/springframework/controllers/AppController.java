@@ -51,5 +51,11 @@ public class AppController {
         model.addAttribute("app", appService.getAppById(id));
         return "appform";
     }
+    @RequestMapping(value = "/profileapp")
+    public String profileapp(Model model){
+    	model.addAttribute("app", new App());
+    	model.addAttribute("apps",appService.listAllApps() );
+        return "profileappform";
+    }
 
 }

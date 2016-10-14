@@ -11,33 +11,34 @@ public class App {
    @Id
    @GeneratedValue(strategy = GenerationType.AUTO)
    private Integer id;
-    private String appName;
+    private String packageName;
     private String versionCode;
-    private File packagefile;
+    private File appfile;
     public Integer getId() {
         return id;
     }
     public void setId(Integer id) {
         this.id = id;
     }
-    public String getAppName() {
-        return appName;
-    }
-    public void setAppName(String appName) {
-        this.appName = appName;
-    }
+    
     public String getVersionCode() {
         return versionCode;
     }
     public void setVersionCode(String versionCode) {
         this.versionCode = versionCode;
     }
-    public File getPackagefile() {
-        return packagefile;
-    }
-    public void setPackagefile(File packagefile) {
-        this.packagefile = packagefile;
-    }
-    
+	public String getPackageName() {
+		return packageName;
+	}
+	public void setPackageName(String packageName) {
+		this.packageName = packageName;
+	}
+	public File getAppfile() {
+		return appfile;
+	}
+	public void setAppfile(File appfile) {
+		this.appfile = appfile;
+	}
+
     
 }

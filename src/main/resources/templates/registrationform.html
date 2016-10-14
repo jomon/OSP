@@ -1,0 +1,85 @@
+    <!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+
+    <title>Spring Framework Guru</title>
+
+    <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+</head>
+<body>
+<!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+<div class="container">
+  <h2>Registrations</h2>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+          <div class="panel-btns">
+            <a href="#" class="panel-close">&times;</a>
+            <a href="#" class="minimize">&minus;</a>
+          </div>
+          <form id="config"  value="config" class="form-horizontal form-bordered" method="post" action="https://www.ospforbusiness.com/toggleFields()" >
+           <div class="form-group">
+			<div class="form-group">
+                 <div class="col-sm-8">
+                  <label class="col-sm-2 control-label">Select Profile:</label>
+                <div class="col-sm-6">
+                    <select id="reglist" name="regListId" class="select2" data-placeholder="Choose One" >
+                    	<option th:each="option : ${configurations}" th:value="${option.id}" 
+                        th:text="${option.profileName}" >Options</option>
+           			 </select>
+                </div>
+               </div>
+               <button onclick="profilename()" id="buttonprofile" value="add" type="button" class="btn btn-primary">SEARCH</button>
+         	</div>   
+            
+
+
+
+            </div><!-- form-group -->
+
+            </form>
+
+      </div><!-- panel -->
+
+
+   </div>
+
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <div class="panel-btns">
+            <a href="#" class="panel-close">&times;</a>
+            <a href="#" class="minimize">&minus;</a>
+
+        <div class="panel-body">
+		   <br />
+          <div class="table-responsive">
+            <table class="table" id="table1">
+              <thead>
+                 <tr>
+                 	<th id="group">Serial Number</th>
+                    <th>Status</th>
+                    <th>User</th>
+                    <th>Admin</th>
+                    <th>Startdate</th>
+                    <th>End date</th>
+                 </tr>
+              </thead>
+              <tbody>
+
+
+
+
+              </tbody>
+           </table>
+		</div>
+
+
+        </div><!-- panel-body -->
+      </div><!-- panel -->
+      </div>
+</div>
+
+</div>
+
+</body>
+</html>
+   
